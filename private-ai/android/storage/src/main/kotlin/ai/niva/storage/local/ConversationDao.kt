@@ -27,6 +27,18 @@ interface ConversationDao {
     @Query("DELETE FROM messages WHERE id = :messageId")
     suspend fun deleteMessage(messageId: String)
 
+    @Query("SELECT * FROM conversations")
+    suspend fun getAllConversationsOnce(): List<ConversationEntity>
+
+    @Query("SELECT * FROM messages")
+    suspend fun getAllMessagesOnce(): List<MessageEntity>
+
+    @Query("DELETE FROM messages")
+    suspend fun deleteAllMessages()
+
+    @Query("DELETE FROM conversations")
+    suspend fun deleteAllConversations()
+
     @Transaction
     suspend fun replaceMessages(conversationId: String, messages: List<MessageEntity>) {
         // Sprint 1: append-only; callers upsert individual messages.

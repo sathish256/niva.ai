@@ -23,26 +23,22 @@ Niva is an offline-first personal AI assistant for mobile. Models run on your ph
 
 The `private-ai/` directory is the engineering codename for the monorepo; the product name everywhere in the app and docs is **Niva**.
 
-## Android (Sprint 1)
-
-Vertical slice:
-
-`Compose UI → ChatViewModel → AIOrchestrator → LocalLLM → llama.cpp JNI`
+## Android
 
 ```bash
 cd private-ai/android
 echo "sdk.dir=$ANDROID_HOME" > local.properties
 ./gradlew :app:assembleDebug
-./gradlew :shared-domain:test :ai-runtime:testDebugUnitTest :model-manager:testDebugUnitTest :app:testDebugUnitTest
+./gradlew testDebugUnitTest
 ```
 
-On-device chat: init [`private-ai/native/llama.cpp`](private-ai/native/llama.cpp), set `enableNativeLlm=true` in `gradle.properties`, import a Qwen3 4B Q4 GGUF. Details: [`private-ai/android/README.md`](private-ai/android/README.md).
+| Sprint | Status | Highlights |
+|--------|--------|------------|
+| **1** | Done | Compose chat, `LocalLLM`, llama.cpp JNI, model manager, Room history |
+| **2** | Done | SQLCipher + Keystore passphrase, plaintext migration, Privacy screen, delete-all |
+| **3+** | Planned | Local RAG, voice, vision, memory |
 
-## Roadmap
-
-- **Sprint 1:** Android chat MVP, streaming, model manager, Room history (current)
-- **Sprint 2:** Encrypted SQLite + Keystore
-- **Sprint 3+:** Local RAG, voice, vision, memory (per product spec)
+On-device chat: [`private-ai/native/llama.cpp`](private-ai/native/llama.cpp), `enableNativeLlm=true`, Qwen3 4B Q4 GGUF — [`private-ai/android/README.md`](private-ai/android/README.md). Encryption: [`private-ai/docs/security/encryption.md`](private-ai/docs/security/encryption.md).
 
 ## Privacy
 

@@ -1,6 +1,6 @@
 # Niva — Android
 
-Offline-first personal AI for Android (Sprint 1).
+Offline-first personal AI for Android (Sprints 1–2).
 
 - **App name:** Niva  
 - **Application ID:** `ai.niva.app`  
@@ -25,8 +25,20 @@ echo "sdk.dir=$ANDROID_HOME" > local.properties
 
 See [../docs/architecture/android-mvp.md](../docs/architecture/android-mvp.md).
 
+## Sprint 2 — encryption & privacy
+
+- `:security` — Keystore-backed `DatabasePassphraseProvider`
+- SQLCipher Room database (`EncryptedNivaDatabaseFactory`)
+- **Privacy** tab — clear chats, delete all local AI data (models kept)
+- Migrates plaintext Sprint 1 `niva.db` automatically
+
 ## Tests
 
 ```bash
-./gradlew :shared-domain:test :ai-runtime:testDebugUnitTest :model-manager:testDebugUnitTest :app:testDebugUnitTest
+./gradlew :shared-domain:test \
+  :security:testDebugUnitTest \
+  :storage:testDebugUnitTest \
+  :ai-runtime:testDebugUnitTest \
+  :model-manager:testDebugUnitTest \
+  :app:testDebugUnitTest
 ```

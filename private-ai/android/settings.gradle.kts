@@ -20,6 +20,7 @@ include(":app")
 include(":ai-runtime")
 include(":model-manager")
 include(":storage")
+include(":security")
 include(":shared-domain")
 
 project(":shared-domain").projectDir = file("../shared/domain")

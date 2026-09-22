@@ -48,6 +48,11 @@ class ConversationRepository(
     suspend fun deleteMessage(messageId: String) {
         dao.deleteMessage(messageId)
     }
+
+    suspend fun clearAll() {
+        dao.deleteAllMessages()
+        dao.deleteAllConversations()
+    }
 }
 
 private fun ConversationEntity.toDomain() = Conversation(
