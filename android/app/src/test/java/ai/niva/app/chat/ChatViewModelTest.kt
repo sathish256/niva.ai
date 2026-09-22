@@ -5,6 +5,8 @@ import ai.niva.airuntime.llm.LocalLLM
 import ai.niva.airuntime.llm.LlmStatus
 import ai.niva.airuntime.llm.LoadedModelInfo
 import ai.niva.airuntime.orchestrator.AIOrchestrator
+import ai.niva.domain.rag.RagContext
+import ai.niva.domain.rag.RagContextProvider
 import ai.niva.app.device.AndroidDeviceCapabilitiesProvider
 import ai.niva.domain.model.ModelDescriptor
 import ai.niva.domain.network.NetworkPolicy
@@ -86,8 +88,10 @@ class ChatViewModelTest {
             thermalState = ai.niva.domain.device.ThermalState.NOMINAL,
             batteryPercent = 100,
         )
+        val rag = mockk<RagContextProvider>()
+        coEvery { rag.retrieve(any(), any()) } returns RagContext.empty()
         val viewModel = ChatViewModel(
-            orchestrator = AIOrchestrator(llm, NetworkPolicy()),
+            orchestrator = AIOrchestrator(llm, rag, NetworkPolicy()),
             localLlm = llm,
             modelManager = modelManager,
             deviceCapabilities = device,

@@ -1,6 +1,7 @@
 package ai.niva.app.chat
 
 import ai.niva.domain.model.Message
+import ai.niva.domain.rag.RagSource
 
 data class ChatUiState(
     val conversationId: String,
@@ -12,4 +13,5 @@ data class ChatUiState(
     val modelStatus: String = "Model not loaded",
     val privacyBanner: String = "AI: On Device · Network: Not Required",
     val errorMessage: String? = null,
+    val lastSources: List<RagSource> = emptyList(),
 )

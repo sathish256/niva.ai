@@ -1,6 +1,7 @@
 package ai.niva.storage
 
 import ai.niva.domain.security.DatabasePassphraseProvider
+import ai.niva.storage.local.DocumentDao
 import ai.niva.storage.local.PlaintextDatabaseMigrator
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -19,6 +20,7 @@ class LocalAiDataWiper @Inject constructor(
     @ApplicationContext private val context: Context,
     private val databaseFactory: EncryptedNivaDatabaseFactory,
     private val conversationRepository: ConversationRepository,
+    private val documentDao: DocumentDao,
     private val passphraseProvider: DatabasePassphraseProvider,
 ) {
 
@@ -28,6 +30,7 @@ class LocalAiDataWiper @Inject constructor(
 
     suspend fun deleteAllLocalAiData(deleteModels: Boolean = false): DataWipeResult {
         conversationRepository.clearAll()
+        documentDao.clearIndex()
         databaseFactory.closeAndClearInstance()
         val dbRemoved = context.deleteDatabase(PlaintextDatabaseMigrator.DATABASE_NAME)
         passphraseProvider.clearPassphraseMaterial()

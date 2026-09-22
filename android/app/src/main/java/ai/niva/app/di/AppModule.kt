@@ -4,6 +4,7 @@ import ai.niva.airuntime.llm.LlamaCppLLM
 import ai.niva.airuntime.llm.LocalLLM
 import ai.niva.airuntime.orchestrator.AIOrchestrator
 import ai.niva.domain.network.NetworkPolicy
+import ai.niva.domain.rag.RagContextProvider
 import ai.niva.modelmanager.ModelManager
 import ai.niva.prompts.PromptRepository
 import dagger.Module
@@ -35,8 +36,9 @@ object AppModule {
     @Singleton
     fun provideAiOrchestrator(
         localLlm: LocalLLM,
+        ragContextProvider: RagContextProvider,
         networkPolicy: NetworkPolicy,
-    ): AIOrchestrator = AIOrchestrator(localLlm, networkPolicy)
+    ): AIOrchestrator = AIOrchestrator(localLlm, ragContextProvider, networkPolicy)
 
     @Provides
     @Singleton

@@ -15,7 +15,7 @@ android {
         minSdk = 26
         targetSdk = 35
         versionCode = 1
-        versionName = "0.2.0"
+        versionName = "0.3.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -54,6 +54,7 @@ dependencies {
     implementation(project(":model-manager"))
     implementation(project(":storage"))
     implementation(project(":security"))
+    implementation(project(":rag"))
     implementation(project(":shared-domain"))
 
     implementation(platform("androidx.compose:compose-bom:2024.10.01"))

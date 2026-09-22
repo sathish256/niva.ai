@@ -22,7 +22,9 @@ class LocalAiDataWiperTest {
         val context = mockk<android.content.Context>(relaxed = true)
         every { context.filesDir } returns java.io.File.createTempFile("niva", "").parentFile!!
         every { context.cacheDir } returns java.io.File.createTempFile("cache", "").parentFile!!
-        val wiper = LocalAiDataWiper(context, factory, repository, passphrase)
+        val documentDao = mockk<ai.niva.storage.local.DocumentDao>(relaxed = true)
+        coEvery { documentDao.clearIndex() } returns Unit
+        val wiper = LocalAiDataWiper(context, factory, repository, documentDao, passphrase)
         wiper.clearConversationsOnly()
         coVerify { dao.deleteAllMessages() }
         coVerify { dao.deleteAllConversations() }

@@ -12,13 +12,14 @@ class AIOrchestratorTest {
 
     @Test
     fun `streams assistant tokens offline`() = runTest {
-        val orchestrator = AIOrchestrator(FakeLocalLLM("hello"))
+        val orchestrator = AIOrchestrator(FakeLocalLLM("hello"), EmptyRagContextProvider())
         val events = orchestrator.streamAssistantReply(
             UserChatRequest(
                 conversationId = "c1",
                 userMessage = "Hi",
                 history = emptyList(),
                 systemPrompt = "test",
+                ragSystemPrompt = "rag",
             ),
         ).toList()
         val text = events.filter { !it.finished }.joinToString("") { it.deltaText }
@@ -27,9 +28,11 @@ class AIOrchestratorTest {
 
     @Test
     fun `buildPrompt includes history`() {
-        val orchestrator = AIOrchestrator(FakeLocalLLM())
+        val orchestrator = AIOrchestrator(FakeLocalLLM(), EmptyRagContextProvider())
         val prompt = orchestrator.buildPrompt(
             systemPrompt = "sys",
+            ragSystemPrompt = "rag",
+            ragExcerpts = listOf("doc p1: excerpt"),
             history = listOf(
                 Message("1", "c", MessageRole.USER, "Earlier", 0),
             ),

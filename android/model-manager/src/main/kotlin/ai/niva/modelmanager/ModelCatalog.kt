@@ -8,6 +8,21 @@ import ai.niva.domain.model.ModelType
 
 object ModelCatalog {
     /** Default on-device LLM; filename is illustrative — actual path comes from registry/import. */
+    fun defaultEmbeddingGemma300m(localPath: String? = null): ModelDescriptor = ModelDescriptor(
+        id = "embedding-gemma-300m",
+        name = "EmbeddingGemma 300M",
+        type = ModelType.EMBEDDING,
+        version = "1",
+        format = ModelFormat.GGUF,
+        quantization = "Q8",
+        sizeBytes = 300_000_000L,
+        minimumRamBytes = 2L * 1024 * 1024 * 1024,
+        contextLength = 2048,
+        capabilities = ModelCapabilities(supportsEmbeddings = true),
+        checksum = null,
+        localPath = localPath,
+    )
+
     fun defaultQwen3_4b_Q4(localPath: String? = null): ModelDescriptor = ModelDescriptor(
         id = "qwen3-4b-q4",
         name = "Qwen3 4B Q4",

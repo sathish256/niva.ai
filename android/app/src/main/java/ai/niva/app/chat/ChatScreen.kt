@@ -76,6 +76,15 @@ fun ChatScreen(viewModel: ChatViewModel) {
                 label = { Text("Message") },
                 enabled = !state.isGenerating,
             )
+            if (state.lastSources.isNotEmpty()) {
+                Text(
+                    text = state.lastSources.joinToString { src ->
+                        val page = src.pageNumber?.let { "page $it" } ?: "chunk ${src.chunkIndex}"
+                        "${src.displayName} — $page"
+                    },
+                    style = MaterialTheme.typography.labelSmall,
+                )
+            }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Button(
                     onClick = viewModel::sendMessage,

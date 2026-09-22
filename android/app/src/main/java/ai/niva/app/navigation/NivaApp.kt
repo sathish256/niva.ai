@@ -2,6 +2,8 @@ package ai.niva.app.navigation
 
 import ai.niva.app.chat.ChatScreen
 import ai.niva.app.chat.ChatViewModel
+import ai.niva.app.documents.DocumentsScreen
+import ai.niva.app.documents.DocumentsViewModel
 import ai.niva.app.privacy.PrivacyScreen
 import ai.niva.app.privacy.PrivacyViewModel
 import androidx.compose.material3.NavigationBar
@@ -54,6 +56,10 @@ fun NivaApp() {
             composable(NivaDestination.Chat.route) {
                 val viewModel: ChatViewModel = hiltViewModel()
                 ChatScreen(viewModel = viewModel)
+            }
+            composable(NivaDestination.Documents.route) {
+                val viewModel: DocumentsViewModel = hiltViewModel()
+                DocumentsScreen(viewModel = viewModel)
             }
             composable(NivaDestination.Privacy.route) {
                 val viewModel: PrivacyViewModel = hiltViewModel()

@@ -10,6 +10,7 @@ import ai.niva.domain.model.Message
 import ai.niva.domain.model.MessageRole
 import ai.niva.domain.selection.ModelSelectionResult
 import ai.niva.modelmanager.ModelManager
+import ai.niva.prompts.DefaultPrompts
 import ai.niva.prompts.PromptRepository
 import ai.niva.storage.ConversationRepository
 import androidx.lifecycle.ViewModel
@@ -108,6 +109,7 @@ class ChatViewModel @Inject constructor(
             _uiState.update { it.copy(isGenerating = true, streamingAssistantText = "") }
             val assistantId = UUID.randomUUID().toString()
             var assembled = ""
+            var sources = emptyList<ai.niva.domain.rag.RagSource>()
             try {
                 orchestrator.streamAssistantReply(
                     UserChatRequest(
@@ -115,9 +117,12 @@ class ChatViewModel @Inject constructor(
                         userMessage = history.lastOrNull { it.role == MessageRole.USER }?.content ?: "",
                         history = history,
                         systemPrompt = promptRepository.systemPrompt(),
+                        ragSystemPrompt = promptRepository.systemPrompt(DefaultPrompts.rag.id),
                     ),
                 ).collect { event ->
-                    if (!event.finished) {
+                    if (event.finished) {
+                        sources = event.sources
+                    } else {
                         assembled += event.deltaText
                         _uiState.update { it.copy(streamingAssistantText = assembled) }
                     }
@@ -138,7 +143,13 @@ class ChatViewModel @Inject constructor(
                     it.copy(errorMessage = ex.message ?: "Generation failed")
                 }
             } finally {
-                _uiState.update { it.copy(isGenerating = false, streamingAssistantText = "") }
+                _uiState.update {
+                    it.copy(
+                        isGenerating = false,
+                        streamingAssistantText = "",
+                        lastSources = sources,
+                    )
+                }
             }
         }
     }

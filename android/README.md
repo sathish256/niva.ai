@@ -25,6 +25,13 @@ echo "sdk.dir=$ANDROID_HOME" > local.properties
 
 See [../docs/architecture/android-mvp.md](../docs/architecture/android-mvp.md).
 
+## Sprint 3 — local RAG
+
+- `:rag` — import, chunk, embed, hybrid retrieval
+- **Docs** tab — import PDF / text / Markdown (on-device)
+- Chat attaches **sources** when RAG hits indexed chunks
+- See [../docs/architecture/rag.md](../docs/architecture/rag.md)
+
 ## Sprint 2 — encryption & privacy
 
 - `:security` — Keystore-backed `DatabasePassphraseProvider`

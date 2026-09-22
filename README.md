@@ -36,7 +36,8 @@ echo "sdk.dir=$ANDROID_HOME" > local.properties
 |--------|--------|------------|
 | **1** | Done | Compose chat, `LocalLLM`, llama.cpp JNI, model manager, Room history |
 | **2** | Done | SQLCipher + Keystore passphrase, plaintext migration, Privacy screen, delete-all |
-| **3+** | Planned | Local RAG, voice, vision, memory |
+| **3** | Done | PDF/text/md ingest, chunking, hybrid vector+keyword RAG, Docs tab, chat sources |
+| **4+** | Planned | Voice, vision, memory, EmbeddingGemma GGUF runtime |
 
 On-device chat: [`native/llama.cpp`](native/llama.cpp), `enableNativeLlm=true`, Qwen3 4B Q4 GGUF — [`android/README.md`](android/README.md). Encryption: [`docs/security/encryption.md`](docs/security/encryption.md).
 

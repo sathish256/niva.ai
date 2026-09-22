@@ -2,6 +2,7 @@ package ai.niva.storage
 
 import ai.niva.domain.security.DatabasePassphraseProvider
 import ai.niva.storage.local.NivaDatabase
+import ai.niva.storage.local.NivaMigrations
 import ai.niva.storage.local.PlaintextDatabaseMigrator
 import android.content.Context
 import androidx.room.Room
@@ -44,6 +45,7 @@ class EncryptedNivaDatabaseFactory @Inject constructor(
             PlaintextDatabaseMigrator.DATABASE_NAME,
         )
             .openHelperFactory(factory)
+            .addMigrations(NivaMigrations.MIGRATION_2_3)
             .fallbackToDestructiveMigration()
             .build()
         if (snapshot != null) {

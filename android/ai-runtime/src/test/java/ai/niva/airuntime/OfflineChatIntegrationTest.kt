@@ -1,6 +1,7 @@
 package ai.niva.airuntime
 
 import ai.niva.airuntime.orchestrator.AIOrchestrator
+import ai.niva.airuntime.orchestrator.EmptyRagContextProvider
 import ai.niva.airuntime.orchestrator.UserChatRequest
 import ai.niva.domain.network.NetworkAccess
 import ai.niva.domain.network.NetworkPolicy
@@ -30,13 +31,14 @@ class OfflineChatIntegrationTest {
         )
         val llm = FakeLocalLLM("Airplane mode response")
         llm.loadModel(ModelCatalog.defaultQwen3_4b_Q4(localPath = "/dev/null"))
-        val orchestrator = AIOrchestrator(llm, policy)
+        val orchestrator = AIOrchestrator(llm, EmptyRagContextProvider(), policy)
         val events = orchestrator.streamAssistantReply(
             UserChatRequest(
                 conversationId = "offline",
                 userMessage = "Hello",
                 history = emptyList(),
                 systemPrompt = "offline",
+                ragSystemPrompt = "rag",
             ),
         ).toList()
         val text = events.filter { !it.finished }.joinToString("") { it.deltaText }
