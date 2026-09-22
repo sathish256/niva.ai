@@ -1,4 +1,4 @@
-[submodule "private-ai/native/llama.cpp"]
-	path = private-ai/native/llama.cpp
+[submodule "native/llama.cpp"]
+	path = native/llama.cpp
 	url = https://github.com/ggml-org/llama.cpp.git
 	branch = master

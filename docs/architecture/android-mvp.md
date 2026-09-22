@@ -26,7 +26,7 @@ ConversationRepository → Room + SQLCipher (`:security` Keystore passphrase)
 Initialize llama.cpp before release builds:
 
 ```bash
-git submodule update --init private-ai/native/llama.cpp
+git submodule update --init native/llama.cpp
 ```
 
 Without the submodule, JNI builds a stub library and `loadModel()` fails until a compatible `.so` and GGUF are present on device.

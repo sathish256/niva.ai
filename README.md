@@ -16,17 +16,17 @@ Niva is an offline-first personal AI assistant for mobile. Models run on your ph
 
 | Path | Purpose |
 |------|---------|
-| [`private-ai/android/`](private-ai/android/) | **Niva** Android app (`applicationId`: `ai.niva.app`) |
-| [`private-ai/shared/`](private-ai/shared/) | Domain models, prompts, shared logic |
-| [`private-ai/docs/`](private-ai/docs/) | Architecture and security notes |
-| [`private-ai/models/`](private-ai/models/) | Model install guide (binaries not committed) |
-
-The `private-ai/` directory is the engineering codename for the monorepo; the product name everywhere in the app and docs is **Niva**.
+| [`android/`](android/) | **Niva** Android app (`applicationId`: `ai.niva.app`) |
+| [`shared/`](shared/) | Domain models, prompts, shared logic |
+| [`docs/`](docs/) | Architecture and security notes |
+| [`models/`](models/) | Model install guide (binaries not committed) |
+| [`native/`](native/) | Native runtimes (llama.cpp submodule) |
+| [`ios/`](ios/) | iOS placeholder |
 
 ## Android
 
 ```bash
-cd private-ai/android
+cd android
 echo "sdk.dir=$ANDROID_HOME" > local.properties
 ./gradlew :app:assembleDebug
 ./gradlew testDebugUnitTest
@@ -38,7 +38,7 @@ echo "sdk.dir=$ANDROID_HOME" > local.properties
 | **2** | Done | SQLCipher + Keystore passphrase, plaintext migration, Privacy screen, delete-all |
 | **3+** | Planned | Local RAG, voice, vision, memory |
 
-On-device chat: [`private-ai/native/llama.cpp`](private-ai/native/llama.cpp), `enableNativeLlm=true`, Qwen3 4B Q4 GGUF — [`private-ai/android/README.md`](private-ai/android/README.md). Encryption: [`private-ai/docs/security/encryption.md`](private-ai/docs/security/encryption.md).
+On-device chat: [`native/llama.cpp`](native/llama.cpp), `enableNativeLlm=true`, Qwen3 4B Q4 GGUF — [`android/README.md`](android/README.md). Encryption: [`docs/security/encryption.md`](docs/security/encryption.md).
 
 ## Privacy
 

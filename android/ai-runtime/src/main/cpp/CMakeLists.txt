@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22.1)
 project(niva_llama_jni)
 
-set(LLAMA_CPP_DIR "${CMAKE_SOURCE_DIR}/../../../../native/llama.cpp")
+set(LLAMA_CPP_DIR "${CMAKE_SOURCE_DIR}/../../../../../native/llama.cpp")
 
 add_library(niva-llama-jni SHARED llama_jni.cpp)
 

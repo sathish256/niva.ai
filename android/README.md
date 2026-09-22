@@ -16,7 +16,7 @@ echo "sdk.dir=$ANDROID_HOME" > local.properties
 
 ### Native llama.cpp
 
-1. `git submodule update --init private-ai/native/llama.cpp` (from repo root)
+1. `git submodule update --init native/llama.cpp` (from repository root)
 2. Install NDK via Android SDK Manager
 3. Set `enableNativeLlm=true` in `gradle.properties`
 4. Place or import a Qwen3 4B Q4 GGUF under app-private `files/models/`

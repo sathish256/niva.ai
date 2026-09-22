@@ -14,9 +14,9 @@ DerivedData/
 build/
 .gradle/
 *.xcuserstate
-private-ai/android/.gradle/
-private-ai/android/**/build/
-private-ai/native/llama.cpp/
+android/.gradle/
+android/**/build/
+native/llama.cpp/
 *.gguf
 *.bin
 local.properties
