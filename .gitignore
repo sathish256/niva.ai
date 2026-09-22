@@ -8,11 +8,18 @@ Thumbs.db
 *.swp
 *.swo
 
-# Dependencies / build (future)
+# Dependencies / build
 node_modules/
 DerivedData/
 build/
+.gradle/
 *.xcuserstate
+private-ai/android/.gradle/
+private-ai/android/**/build/
+private-ai/native/llama.cpp/
+*.gguf
+*.bin
+local.properties
 
 # Secrets
 .env

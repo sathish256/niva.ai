@@ -19,9 +19,18 @@ Niva is a personal AI that lives on your phone—not in someone else's cloud. Yo
 - No using your content to train shared foundation models without clear, explicit consent  
 - Delete your data from the app when you want—without a support ticket  
 
+## PrivateAI (offline-first mobile assistant)
+
+Product code lives under [`private-ai/`](private-ai/). Sprint 1 delivers the Android vertical slice:
+
+`Compose UI → ChatViewModel → AIOrchestrator → LocalLLM (llama.cpp JNI) → streaming chat`
+
+See [`private-ai/docs/architecture/android-mvp.md`](private-ai/docs/architecture/android-mvp.md) and build from [`private-ai/android/`](private-ai/android/).
+
 ## Status
 
-This repository is the home for **niva.ai** product engineering, documentation, and release tooling. Application source and design assets will land here as they are ready for open collaboration.
+- **Sprint 1 (in progress):** Android chat MVP with local LLM abstraction, model manager, Room conversation storage, unit/offline integration tests.
+- **Next:** encrypted SQLite (Sprint 2), then local RAG.
 
 ## License
 

@@ -1,0 +1,25 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "PrivateAI"
+
+include(":app")
+include(":ai-runtime")
+include(":model-manager")
+include(":storage")
+include(":shared-domain")
+
+project(":shared-domain").projectDir = file("../shared/domain")
