@@ -11,7 +11,7 @@ LocalLLM ← LlamaCppLLM ← JNI ← llama.cpp (optional submodule)
         ↓
 ModelManager / ModelDescriptor
         ↓
-ConversationRepository → Room (plaintext Sprint 1; SQLCipher Sprint 2)
+ConversationRepository → Room + SQLCipher (`:security` Keystore passphrase)
 ```
 
 ## Rules
