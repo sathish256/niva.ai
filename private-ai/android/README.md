@@ -1,6 +1,10 @@
-# PrivateAI — Android
+# Niva — Android
 
-Offline-first personal AI (Sprint 1 MVP).
+Offline-first personal AI for Android (Sprint 1).
+
+- **App name:** Niva  
+- **Application ID:** `ai.niva.app`  
+- **Package root:** `ai.niva.*`
 
 ## Build
 
@@ -10,14 +14,12 @@ echo "sdk.dir=$ANDROID_HOME" > local.properties
 ./gradlew :app:assembleDebug
 ```
 
-### Native llama.cpp (on-device inference)
+### Native llama.cpp
 
-1. `git submodule update --init ../native/llama.cpp`
-2. Install NDK via Android SDK Manager.
-3. Set `enableNativeLlm=true` in `gradle.properties`.
-4. Import a Qwen3 4B Q4 GGUF via the app’s model directory (`files/models/`).
-
-Without native build, the JNI stub loads but `loadModel()` fails until a native library is built.
+1. `git submodule update --init private-ai/native/llama.cpp` (from repo root)
+2. Install NDK via Android SDK Manager
+3. Set `enableNativeLlm=true` in `gradle.properties`
+4. Place or import a Qwen3 4B Q4 GGUF under app-private `files/models/`
 
 ## Architecture
 

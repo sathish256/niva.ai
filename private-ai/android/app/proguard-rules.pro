@@ -1,1 +1,1 @@
-# PrivateAI release rules (placeholder for Sprint 8).
+# Niva release rules (placeholder for Sprint 8).

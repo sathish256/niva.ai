@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ai.privateai.modelmanager"
+    namespace = "ai.niva.modelmanager"
     compileSdk = 35
 
     defaultConfig {

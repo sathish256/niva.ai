@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PrivateAI"
+rootProject.name = "Niva"
 
 include(":app")
 include(":ai-runtime")

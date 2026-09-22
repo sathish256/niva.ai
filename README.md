@@ -2,36 +2,52 @@
 
 **Your AI. Your Phone. Your Data.**
 
-Niva is a personal AI that lives on your phone—not in someone else's cloud. Your conversations, habits, and context stay on the device you already trust. No account required to get started; no silent export of your life to a data broker.
+Niva is an offline-first personal AI assistant for mobile. Models run on your phone; your chats, documents, and memories are designed to stay on the device—not on a vendor’s cloud.
 
-## Why Niva
+## Principles
 
-| Principle | What it means |
-|-----------|----------------|
-| **Your AI** | Assistance tuned to you—insights, focus, and answers without treating you as training fuel. |
-| **Your Phone** | Native, fast, and available offline when the model allows. Built for the platform, not a generic web wrapper. |
-| **Your Data** | Local-first storage. You choose what to keep, share, or delete. |
+| | |
+|---|---|
+| **Your AI** | On-device inference (llama.cpp), no default cloud LLM fallback |
+| **Your Phone** | Native Android (iOS planned); works in airplane mode after models are installed |
+| **Your Data** | Local storage, encryption in progress; you control export and deletion |
 
-## Privacy promise
+## Repository layout
 
-- Data stored on your device by default  
-- No selling or renting your information  
-- No using your content to train shared foundation models without clear, explicit consent  
-- Delete your data from the app when you want—without a support ticket  
+| Path | Purpose |
+|------|---------|
+| [`private-ai/android/`](private-ai/android/) | **Niva** Android app (`applicationId`: `ai.niva.app`) |
+| [`private-ai/shared/`](private-ai/shared/) | Domain models, prompts, shared logic |
+| [`private-ai/docs/`](private-ai/docs/) | Architecture and security notes |
+| [`private-ai/models/`](private-ai/models/) | Model install guide (binaries not committed) |
 
-## PrivateAI (offline-first mobile assistant)
+The `private-ai/` directory is the engineering codename for the monorepo; the product name everywhere in the app and docs is **Niva**.
 
-Product code lives under [`private-ai/`](private-ai/). Sprint 1 delivers the Android vertical slice:
+## Android (Sprint 1)
 
-`Compose UI → ChatViewModel → AIOrchestrator → LocalLLM (llama.cpp JNI) → streaming chat`
+Vertical slice:
 
-See [`private-ai/docs/architecture/android-mvp.md`](private-ai/docs/architecture/android-mvp.md) and build from [`private-ai/android/`](private-ai/android/).
+`Compose UI → ChatViewModel → AIOrchestrator → LocalLLM → llama.cpp JNI`
 
-## Status
+```bash
+cd private-ai/android
+echo "sdk.dir=$ANDROID_HOME" > local.properties
+./gradlew :app:assembleDebug
+./gradlew :shared-domain:test :ai-runtime:testDebugUnitTest :model-manager:testDebugUnitTest :app:testDebugUnitTest
+```
 
-- **Sprint 1 (in progress):** Android chat MVP with local LLM abstraction, model manager, Room conversation storage, unit/offline integration tests.
-- **Next:** encrypted SQLite (Sprint 2), then local RAG.
+On-device chat: init [`private-ai/native/llama.cpp`](private-ai/native/llama.cpp), set `enableNativeLlm=true` in `gradle.properties`, import a Qwen3 4B Q4 GGUF. Details: [`private-ai/android/README.md`](private-ai/android/README.md).
+
+## Roadmap
+
+- **Sprint 1:** Android chat MVP, streaming, model manager, Room history (current)
+- **Sprint 2:** Encrypted SQLite + Keystore
+- **Sprint 3+:** Local RAG, voice, vision, memory (per product spec)
+
+## Privacy
+
+No mandatory backend or internet for AI features. Network use for AI subsystems is denied by default (`NetworkPolicy`). No analytics or cloud inference in the initial release.
 
 ## License
 
-License TBD. Until a `LICENSE` file is added, all rights reserved by the project owners.
+License TBD until a `LICENSE` file is added.

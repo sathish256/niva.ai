@@ -1,4 +1,4 @@
-# Android MVP architecture (Sprint 1)
+# Niva — Android MVP architecture (Sprint 1)
 
 ```
 Compose UI (ChatScreen)

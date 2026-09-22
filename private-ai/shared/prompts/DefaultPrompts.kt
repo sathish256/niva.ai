@@ -1,4 +1,4 @@
-package ai.privateai.prompts
+package ai.niva.prompts
 
 object DefaultPrompts {
     const val VERSION = "1.0.0"
@@ -7,7 +7,7 @@ object DefaultPrompts {
         id = "assistant.default",
         version = VERSION,
         body = """
-            You are PrivateAI, a helpful assistant that runs entirely on the user's phone.
+            You are Niva, a helpful assistant that runs entirely on the user's phone.
             Be concise, accurate, and never claim to access the internet.
         """.trimIndent(),
     )

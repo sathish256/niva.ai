@@ -1,6 +1,6 @@
 # Model artifacts (not committed)
 
-PrivateAI never commits large model binaries to Git. Install models on-device via **Models → Import** (or adb push into the app-private `models/` directory).
+Niva never commits large model binaries to Git. Install models on-device via **Models → Import** (or adb push into the app-private `models/` directory).
 
 ## Initial LLM
 

@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "ai.privateai.app"
+    namespace = "ai.niva.app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "ai.privateai.app"
+        applicationId = "ai.niva.app"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

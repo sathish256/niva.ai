@@ -6,7 +6,7 @@ plugins {
 val enableNativeLlm = providers.gradleProperty("enableNativeLlm").orNull == "true"
 
 android {
-    namespace = "ai.privateai.airuntime"
+    namespace = "ai.niva.airuntime"
     compileSdk = 35
 
     defaultConfig {

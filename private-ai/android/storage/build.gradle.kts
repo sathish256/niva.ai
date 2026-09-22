@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ai.privateai.storage"
+    namespace = "ai.niva.storage"
     compileSdk = 35
 
     defaultConfig {

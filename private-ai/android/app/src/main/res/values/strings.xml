@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PrivateAI</string>
+    <string name="app_name">Niva</string>
     <string name="privacy_ai_on_device">AI: On Device</string>
     <string name="privacy_network_not_required">Network: Not Required</string>
 </resources>

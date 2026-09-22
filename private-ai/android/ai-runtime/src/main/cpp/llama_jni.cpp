@@ -5,13 +5,13 @@
 #include <string>
 #include <vector>
 
-#define LOG_TAG "PrivateAILlama"
+#define LOG_TAG "NivaLlama"
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
 static std::atomic<bool> g_cancel{false};
 static std::mutex g_mutex;
 
-#if defined(PRIVATEAI_LLAMA_CPP)
+#if defined(NIVA_LLAMA_CPP)
 #include "llama.h"
 #include "common.h"
 
@@ -20,7 +20,7 @@ static llama_context *g_ctx = nullptr;
 #endif
 
 static bool call_token_bridge(JNIEnv *env, const std::string &token) {
-    jclass bridge = env->FindClass("ai/privateai/airuntime/llm/LlamaTokenBridge");
+    jclass bridge = env->FindClass("ai/niva/airuntime/llm/LlamaTokenBridge");
     if (!bridge) {
         LOGE("LlamaTokenBridge not found");
         return false;
@@ -37,9 +37,9 @@ static bool call_token_bridge(JNIEnv *env, const std::string &token) {
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_ai_privateai_airuntime_llm_LlamaNative_loadModel(JNIEnv *env, jobject /*thiz*/, jstring path,
+Java_ai_niva_airuntime_llm_LlamaNative_loadModel(JNIEnv *env, jobject /*thiz*/, jstring path,
                                                       jint context_length) {
-#if !defined(PRIVATEAI_LLAMA_CPP)
+#if !defined(NIVA_LLAMA_CPP)
     LOGE("llama.cpp not compiled into native library");
     return JNI_FALSE;
 #else
@@ -69,8 +69,8 @@ Java_ai_privateai_airuntime_llm_LlamaNative_loadModel(JNIEnv *env, jobject /*thi
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_ai_privateai_airuntime_llm_LlamaNative_unloadModel(JNIEnv * /*env*/, jobject /*thiz*/) {
-#if defined(PRIVATEAI_LLAMA_CPP)
+Java_ai_niva_airuntime_llm_LlamaNative_unloadModel(JNIEnv * /*env*/, jobject /*thiz*/) {
+#if defined(NIVA_LLAMA_CPP)
     std::lock_guard<std::mutex> lock(g_mutex);
     if (g_ctx) {
         llama_free(g_ctx);
@@ -85,15 +85,15 @@ Java_ai_privateai_airuntime_llm_LlamaNative_unloadModel(JNIEnv * /*env*/, jobjec
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_ai_privateai_airuntime_llm_LlamaNative_cancelGeneration(JNIEnv * /*env*/, jobject /*thiz*/) {
+Java_ai_niva_airuntime_llm_LlamaNative_cancelGeneration(JNIEnv * /*env*/, jobject /*thiz*/) {
     g_cancel.store(true);
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_ai_privateai_airuntime_llm_LlamaNative_streamCompletionNative(JNIEnv *env, jobject /*thiz*/,
+Java_ai_niva_airuntime_llm_LlamaNative_streamCompletionNative(JNIEnv *env, jobject /*thiz*/,
                                                                    jstring prompt, jint max_tokens,
                                                                    jfloat temperature) {
-#if !defined(PRIVATEAI_LLAMA_CPP)
+#if !defined(NIVA_LLAMA_CPP)
     LOGE("streamCompletion unavailable without llama.cpp");
     return JNI_FALSE;
 #else
