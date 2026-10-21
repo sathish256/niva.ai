@@ -1,0 +1,27 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Dependencies / build
+node_modules/
+DerivedData/
+build/
+.gradle/
+*.xcuserstate
+android/.gradle/
+android/**/build/
+native/llama.cpp/
+*.gguf
+*.bin
+local.properties
+
+# Secrets
+.env
+.env.*
+!.env.example
